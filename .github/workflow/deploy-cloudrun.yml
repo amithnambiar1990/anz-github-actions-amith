@@ -22,14 +22,14 @@ jobs:
  
       - name: Build and push Docker image
         run: |
-          IMAGE=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/devops-repo/my-app:${{ github.sha }}
+          IMAGE=${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/gpc-amith-artifact-repo/my-app:${{ github.sha }}
           docker build -t $IMAGE .
           docker push $IMAGE
           echo "IMAGE=$IMAGE" >> $GITHUB_ENV
  
       - name: Deploy to Cloud Run
         run: |
-          gcloud run deploy my-python-app \
+          gcloud run deploy amith-python-app \
             --image $IMAGE \
             --region ${{ secrets.GCP_REGION }} \
             --platform managed \
